@@ -85,6 +85,7 @@ export default {
     width: 100%;
     height: 100vh;
     position: relative;
+    background-color: rgb(27, 76, 98);
     background: linear-gradient(rgba(49, 92, 117, 0.75), rgba(0, 0, 0, 0.75)),
     url("../assets/santa_marta.jpg");
     background-position: center;

@@ -1,5 +1,5 @@
 <template>
-
+<div class="body">
     <form class="formulario" v-on:submit.prevent="processSignUp">
     
         <h1>Registrate ahora</h1>
@@ -25,6 +25,7 @@
             <p>Ya tienes una cuenta?<button class="login" v-if="!is_auth" v-on:click="loadLogIn" > Iniciar Sesión </button></p>
         </div>
     </form>
+</div>
 </template>
 
 <script>
@@ -57,9 +58,9 @@ export default {
             )
                 .then((result) => {
                     let dataSignUp = {
-                        username: this.user.username,
-                        token_access: result.data.access,
-                        token_refresh: result.data.refresh,
+                        username:       this.user.username,
+                        token_access:   result.data.access,
+                        token_refresh:  result.data.refresh,
                     }
                     this.$emit('completedSignUp', dataSignUp)   
                 })

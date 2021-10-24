@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import App from './App.vue';
+import App                                from './App.vue';
 
 import LogIn        from    './components/LogIn.vue'
 import SignUp       from    './components/SignUp.vue'
@@ -39,10 +39,10 @@ const routes = [{
     component: Home
     },
 {
-        path: '/test',
-        name: "hometest",
-        component: Home_main
-        }
+    path: '/home',
+    name: "homeLog",
+    component: Home_main
+    }
 ];
 
 const router = createRouter({

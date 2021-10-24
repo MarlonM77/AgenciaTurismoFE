@@ -1,11 +1,4 @@
 <template>
-  <div class="body">
-      <nav class="nav">
-        <button class="link" v-if="is_auth" v-on:click="loadHome"> Inicio </button>
-        <button class="link" v-if="is_auth" v-on:click="loadPlan"> Cuenta </button>
-        <button class="link" v-if="is_auth" v-on:click="logOut"> Cerrar Sesión </button>      
-      </nav>
-
     <div class="main-component">
       <router-view
         v-on:completedLogIn="completedLogIn"
@@ -13,7 +6,6 @@
         v-on:logOut="logOut">
       </router-view>
     </div>
-  </div>
 </template>
 
 <script>
@@ -47,11 +39,11 @@ export default {
       if (this.is_auth == false)
         this.$router.push({ name: "logIn" });
       else
-        this.$router.push({ name: "profile" });
+        this.$router.push({ name: "homeLog" });
     },
 
     loadHome: function() {
-      this.$router.push({ name: "profile" });
+      this.$router.push({ name: "homeLog" });
     },
 
     loadLogIn: function(){
@@ -78,6 +70,10 @@ export default {
     completedSignUp: function(data) {
       alert("Registro Exitoso");
       this.completedLogIn(data);
+    },
+
+    completedReserve: function() {
+      alert("Reserva Exitosa");
     },
   },
 
