@@ -142,7 +142,6 @@
                 <a href="#" data-value="4"  title="Califica con 4 estrellas">&#9733;</a>
                 <a href="#" data-value="5"  title="Califica con 5 estrellas">&#9733;</a>
                 </div>
-
                 <div class="descripcion">
                     <h2>Plan playa</h2>
                     <p class="parrafo-plan">con playa privada en Santa Marta, aquí descubrirá la combinación<br> perfecta de servicios de alta tecnología y comodidades de primera 
@@ -251,6 +250,7 @@ export default {
         processReserve: function(){
             let token = localStorage.getItem("token_access");
             let userId  = jwt_decode(token).user_id.toString();  
+
             let dataPlan = {
                 user_id:                userId,
                 planData: {
@@ -264,6 +264,15 @@ export default {
                 }
             }
             console.log(dataPlan);
+
+            axios.post(
+                "https://agencia-logiclayer.herokuapp.com/plan/",
+                dataPlan,
+                {headers: {}}
+            )
+                .catch(() => {
+
+                })
         }
     }
 }
@@ -369,7 +378,6 @@ export default {
     z-index: 2;
 }
 
-
 .ec-stars-wrapper {	
     position: relative;
 	font-size: 0;
@@ -377,7 +385,7 @@ export default {
     box-sizing: border-box;
     width: 9rem;
     height: 2.5rem;
-    margin-left: 0rem;
+    margin-left: 0;
     top: 20rem
 }
 
@@ -386,7 +394,6 @@ export default {
 	text-decoration: none;
 	display: inline-block;
 	/* Volver a dar tamaño al texto */
-	font-size: 32px;
 	font-size: 2rem;
 	
 	color: rgb(146, 226, 255);
@@ -398,7 +405,7 @@ export default {
 /*
  * El selector de hijo, es necesario para aumentar la especifidad
  */
-.ec-stars-wrapper2 > a:hover ~ a {
+.ec-stars-wrapper > a:hover ~ a {
 	color: rgb(146, 226, 255);
 }
 
@@ -418,7 +425,6 @@ export default {
 	text-decoration: none;
 	display: inline-block;
 	/* Volver a dar tamaño al texto */
-	font-size: 32px;
 	font-size: 2rem;
 	
 	color: rgb(146, 226, 255);
@@ -433,6 +439,7 @@ export default {
 .ec-stars-wrapper2 > a:hover ~ a {
 	color: rgb(146, 226, 255);
 }
+
 
 .contenedor-bg .plan{
     position: absolute;
@@ -576,14 +583,14 @@ export default {
 }
 
 .map-popup .map .fa-map-marker-alt:hover{
-    transform: rotate(-45deg);
+    transform: rotate(-35deg);
     transition: 0.5s;
 }
 
 .map-popup .map .fa-map-marker-alt{
     color: rgb(241, 67, 67);
     font-size: 40px;
-    transform: rotate(45deg);
+    transform: rotate(25deg);
     text-align: center;
     transition: 0.5s;
 }
