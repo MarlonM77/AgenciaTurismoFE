@@ -1,7 +1,7 @@
 <template>
     <div class="circulos-links-main">
-        <div class="contenedor-hm">
-            <a href="#" class="circulo" v-on:click="marker1"><i class="fas fa-map-marker-alt"></i></a>
+        <div class="contenedor-hm" id="backgroundL">
+            <a href="#" class="circulo"  v-on:click="loadLugares" id="lugar"><i class="fas fa-map-marker-alt"></i></a>
             <div class="texto-hm">
                 <p>Lugares</p>
             </div>
@@ -29,6 +29,9 @@ export default {
     methods: {
         loadPlanes: function(){
             this.$router.push({name: "homeLog"})
+        },
+        loadLugares: function(){
+            this.$router.push({name: "lugares"})
         }
     }
 }

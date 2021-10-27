@@ -21,12 +21,12 @@
                         <Datepicker v-model="dataPlan.dateF" class="dateF" :minDate="new Date()"
                             v-on:update:modelValue="checkIn2" locale="es" autoApply :closeOnAutoApply="false"></Datepicker>
                         <h2>Cantidad de Personas: </h2> 
-                        <input type="number" placeholder="Personas" v-model="dataPlan.cant_personas" min="1" max="6" class="number" 
+                        <input type="number" placeholder="Personas" v-model="reserva.plan_data.cant_personas" min="1" max="6" class="number" 
                             id="number" v-on:change="calculateValue">
                         <h2>Valor:</h2>
-                        <span class="valor">${{dataPlan.valor}} COP</span>
+                        <span class="valor">${{reserva.plan_data.valor}} COP</span>
                     </div>
-                    <input type="text" value="Reservar" class="btn-reservar" v-on:click="processReserve">
+                    <input type="text" value="Reservar" class="btn-reservar" v-on:click="processReserve" readonly>
                 </form>
             </div>
         </div>
@@ -160,6 +160,8 @@
 <script>
 import axios from 'axios';
 
+import Swal from 'sweetalert2'
+
 import Datepicker from 'vue3-date-time-picker';
 import 'vue3-date-time-picker/dist/main.css'
 
@@ -188,11 +190,17 @@ export default {
                 cant_personas:  1
             },
 
-            dataPlan2:{
-                valor:          100000,
-                dateI:          null,
-                dateF:          null,
-                cant_personas:  1
+            reserva: {
+                user_id:             0,
+                plan_data:{
+                    user:            0,
+                    valor:           100000,
+                    fecha_inicio:    "2021-02-05 18:30:00",
+                    fecha_fin:       "2021-02-10 18:30:00",
+                    nombre_plan:     "Plan Senderismo de ensueño",
+                    descripcion:     "Este Plan de senderismo en Santa Marta se caracteriza por sus impactantes vistas y recorridos",
+                    cant_personas:   1
+                }
             }
         }
     }, 
@@ -213,24 +221,24 @@ export default {
             this.$router.push({name: "logIn"})
         },
         calculateValue: function(){
-            let cant_personas = this.dataPlan.cant_personas;
+            let cant_personas = this.reserva.plan_data.cant_personas;
             if(cant_personas == 1){
-                this.dataPlan.valor = 100000;
+                this.reserva.plan_data.valor = 100000;
             }
             else if(cant_personas == 2){
-                this.dataPlan.valor = 250000;
+                this.reserva.plan_data.valor = 250000;
             }
             else if(cant_personas == 3){
-                this.dataPlan.valor = 500000;
+                this.reserva.plan_data.valor = 500000;
             }
             else if(cant_personas == 4){
-                this.dataPlan.valor = 750000;
+                this.reserva.plan_data.valor = 750000;
             }
             else if(cant_personas == 5){
-                this.dataPlan.valor = 1000000;
+                this.reserva.plan_data.valor = 1000000;
             }
             else if(cant_personas == 6){
-                this.dataPlan.valor = 1250000;
+                this.reserva.plan_data.valor = 1250000;
             }
         },
 
@@ -238,42 +246,50 @@ export default {
             this.$router.push({name: "plan"});
         },
 
-        checkIn: function(){
-            let dateI = this.dataPlan.dateI;
-            console.log(Datepicker);
-        },
-        
-        checkIn2: function(){
-            let dateF = this.dataPlan.dateF;
-        },
+        processReserve: async function(){
 
-        processReserve: function(){
-            let token = localStorage.getItem("token_access");
-            let userId  = jwt_decode(token).user_id.toString();  
-
-            let dataPlan = {
-                user_id:                userId,
-                planData: {
-                    user:               userId,
-                    valor:              this.dataPlan.valor,
-                    fecha_inicio:       this.dataPlan.dateI,
-                    fecha_fin:          this.dataPlan.dateF,      
-                    nombre_plan:        "Plan Senderismo de ensueño",
-                    descripcion:        "Este Plan de senderismo en Santa Marta se caracteriza por sus impactantes vistas y recorridos",
-                    cant_personas:      this.dataPlan.cant_personas
-                }
+            if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null) {
+                this.$emit('logOut');
+                return;
             }
-            console.log(dataPlan);
+
+            await this.verifyToken();
+
+            let token       = localStorage.getItem("token_access");
+            let userId      = jwt_decode(token).user_id.toString();  
+
+            this.reserva.user_id           = userId;
+            this.reserva.plan_data.user    = userId;
+
+            console.log(this.reserva);
 
             axios.post(
                 "https://agencia-logiclayer.herokuapp.com/plan/",
-                dataPlan,
-                {headers: {}}
-            )
-                .catch(() => {
-
+                this.reserva, {headers: {'Authorization':`Bearer ${token}`}})
+                .then(() => {
+                    this.$emit('completedReserve')  
                 })
-        }
+                .catch((error) => {
+                    if (error.response.status == "401")
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Parece que ha ocurrido un error, comprueba que los campos se hayan llenado correctamente',
+                        footer: 'Viaja por colombia Error de reserva'
+                        })
+                })
+        },
+
+        verifyToken: async function () {
+            return axios.post("https://agencia-logiclayer.herokuapp.com/refresh/", {refresh: localStorage.getItem("token_refresh")}, 
+            {headers: {}})
+            .then((result) => {
+                localStorage.setItem("token_access", result.data.access);
+            })
+            .catch(() => {
+                this.$emit('logOut');
+                });
+            },
     }
 }
 
@@ -383,7 +399,7 @@ export default {
 	font-size: 0;
     display: inline-block;
     box-sizing: border-box;
-    width: 9rem;
+    width: 8.4rem;
     height: 2.5rem;
     margin-left: 0;
     top: 20rem

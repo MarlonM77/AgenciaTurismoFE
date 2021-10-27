@@ -36,6 +36,8 @@
 <script>
 import axios from 'axios';
 
+import Swal from 'sweetalert2'
+
 export default {
     name: "LogIn",
     
@@ -67,7 +69,12 @@ export default {
                 })
                 .catch((error) => {
                     if (error.response.status == "401")
-                        alert("ERROR 401: Credenciales Incorrectas.");
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Parece que ha ocurrido un error, comprueba que el nombre y contraseña sean correctos',
+                            footer: 'Viaja por colombia Error de Sesion'
+                        })
                 });
         },
         loadSignUp: function(){

@@ -7,6 +7,7 @@ import Profile      from    './components/Profile.vue'
 import Plan         from    './components/Plan.vue'
 import Home         from    './components/Home.vue'
 import Home_main    from    './components/Home_main.vue'
+import lugares      from    './components/lugares.vue'      
 
 const routes = [{
     path: '/',
@@ -32,16 +33,21 @@ const routes = [{
     path: '/user/plan',
     name: "plan",
     component: Plan
-    },
+},
 {
     path: '',
     name: "home",
     component: Home
-    },
+},
 {
-    path: '/home',
+    path: '/home/planes',
     name: "homeLog",
     component: Home_main
+},
+{
+    path: '/home/lugares',
+    name: "lugares",
+    component: lugares
     }
 ];
 

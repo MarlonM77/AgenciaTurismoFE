@@ -3,12 +3,16 @@
       <router-view
         v-on:completedLogIn="completedLogIn"
         v-on:completedSignUp="completedSignUp"
+        v-on:completedReserve="completedReserve"
         v-on:logOut="logOut">
       </router-view>
     </div>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
+
 export default {
   name: 'App',
 
@@ -25,15 +29,7 @@ export default {
     created: function(){
       this.verifyAuth()
   },
-
-    logOut: function () {
-      let sesion = confirm("¿Desea cerrar Sesion?")
-      if(sesion == true){
-        localStorage.clear();
-      }
-      this.verifyAuth();
-    },
-
+    
     verifyAuth: function() {
       this.is_auth = localStorage.getItem("isAuth") || false;
       if (this.is_auth == false)
@@ -63,17 +59,35 @@ export default {
       localStorage.setItem("username", data.username);
       localStorage.setItem("token_access", data.token_access);
       localStorage.setItem("token_refresh", data.token_refresh);
-      alert("Autenticación Exitosa");
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Usuario Autenticado',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.verifyAuth();
     },
 
     completedSignUp: function(data) {
-      alert("Registro Exitoso");
+        Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Registro Exitoso',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.completedLogIn(data);
     },
 
     completedReserve: function() {
-      alert("Reserva Exitosa");
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Reserva exitosa',
+        showConfirmButton: false,
+        timer: 1500
+      })
     },
   },
 

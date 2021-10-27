@@ -1,11 +1,16 @@
-<template>   
+<template>
+<div class="containerNav">   
     <navBar class="nav"></navBar> 
-    <a href="#" class="leave" v-on:click="logOut"><i class="fas fa-sign-out-alt"></i></a>>  
+    <a href="#" class="leave" v-on:click="logOut"><i class="fas fa-sign-out-alt"></i></a>> 
+</div>
+<div class="container">
+    <h1 class="tittle">Información de su cuenta</h1>
         <div v-if="loaded" class="information">
-            <h1 class="tittle">Información de su cuenta</h1>
             <h2>Nombre: <span>{{name}}</span></h2>
             <h2>Usuario: <span>{{username}}</span></h2>
             <h2>Correo electrónico: <span>{{email}}</span></h2>
+        </div>
+        <div class="reserva" v-if="sinReservas">
             <h2>Mis Reservas:</h2>
             <h2><span>{{nombre_plan}}</span></h2>
             <h2>descripcion: <span>{{descripcion}}</span></h2>
@@ -13,13 +18,12 @@
             <h2>valor: <span>{{valor}}COP</span></h2>
             <h2>fecha_inicio: <span>{{fecha_inicio}}</span></h2>
             <h2>fecha_fin: <span>{{fecha_fin}}</span></h2>
-            <div class="plan" v-if="sinReserva">
-                <h2 style="color:crimson">Sin Reservas</h2>
-            </div>
         </div>
+</div>
 </template>
 
 <script>
+    import Swal from 'sweetalert2'
     import navBar from "@/components/navBar.vue";
     
     import jwt_decode from "jwt-decode";
@@ -34,7 +38,8 @@
 
         data: function(){
             return {
-                is_auth:        false,
+                is_auth:         false,
+                sinReservas:     false,
 
                 username:        "",
                 name:            "",
@@ -47,9 +52,6 @@
                 fecha_fin:       0, 
                 loaded:          false,
 
-                usernameWP:        "",
-                nameWP:            "",
-                emailWP:           "",
             }
         },
 
@@ -58,11 +60,24 @@
                 this.verifyAuth()
             },
             logOut: function () {
-                let sesion = confirm("¿Desea cerrar Sesion?")
-                if(sesion == true){
+                Swal.fire({
+                    title: 'Estás seguro?',
+                    text: "Si es así, te esperamos pronto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, deseo salir'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    Swal.fire(
+                    'Sesion cerrada',
+                    )
                     localStorage.clear();
                 }
                 this.verifyAuth();
+                })
+                
             },   
             verifyAuth: function() {
                 this.is_auth = localStorage.getItem("isAuth") || false;
@@ -94,26 +109,34 @@
                         this.cant_personas  = data.reservas.cant_personas;
                         this.valor          = data.reservas.valor;
                         this.fecha_inicio   = data.reservas.fecha_inicio;
-                        this.fecha_fin      = data.reservas.fecha_fin;               
+                        this.fecha_fin      = data.reservas.fecha_fin;
+                        this.sinReservas    = true;               
                         this.loaded         = true;
 
                 })
                 .catch(() => {
+                    
                     axios.get(`https://agencia-logiclayer.herokuapp.com/user/${userId}/`, {headers: {'Authorization': `Bearer ${token}`}})
                     .then((result) => {
-                        console.log(result.data);
                         this.username       = result.data.username; 
                         this.name           = result.data.name;
                         this.email          = result.data.email;           
                         this.loaded         = true;
                         })
                         .catch(() => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Parece que ha ocurrido un error',
+                                footer: 'Viaja por colombia error de petición'
+                            })
                             this.$emit('logOut');
                         });
                     });
                 },  
                 verifyToken: function () {
-                    return axios.post("https://agencia-logiclayer.herokuapp.com/refresh/", {refresh: localStorage.getItem("token_refresh")}, {headers: {}})
+                    return axios.post("https://agencia-logiclayer.herokuapp.com/refresh/", {refresh: localStorage.getItem("token_refresh")}, 
+                    {headers: {}})
                     .then((result) => {
                         localStorage.setItem("token_access", result.data.access);
                     })
@@ -129,6 +152,18 @@
 </script>
 
 <style>
+
+.container {
+    position: absolute;
+    top: 0px;
+    padding: 0%;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    flex-direction: row;
+    background: rgb(241, 139, 139);
+    align-content: center;
+}
 
 .nav a{
     text-decoration: none;
@@ -162,30 +197,37 @@
     color: #fafafafa;
 }
 
-.information {
-    position: absolute;
-    top: 0px;
-    padding: 0%;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: rgb(241, 139, 139);
+.container .information{
+    text-align: center;
+    margin-bottom: 2em;
 }
 
-    
-.tittle{
-    font-size: 30px;
-    margin-top: 4em;
+.container .reserva{
+    text-align: center;
+}
+
+.container .tittle{
     margin-bottom: 1em;
-    color: black;
 }
 
+.perfil{
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.reserva h2{
+    font-size: 25px;
+    color: #2a2a2a;
+}
+
+.reserva span{
+    color: crimson;
+    font-weight: bold;
+}
 .information h2{
     font-size: 25px;
-    color: #283747;
+    color: #2a2a2a;
 }
 
 .information span{

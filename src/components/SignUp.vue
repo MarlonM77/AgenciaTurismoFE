@@ -54,8 +54,7 @@ export default {
             axios.post(
                 "https://agencia-logiclayer.herokuapp.com/user/",
                 this.user,
-                {headers: {}}
-            )
+                {headers: {}})
                 .then((result) => {
                     let dataSignUp = {
                         username:       this.user.username,
