@@ -7,7 +7,9 @@ import Profile      from    './components/Profile.vue'
 import Plan         from    './components/Plan.vue'
 import Home         from    './components/Home.vue'
 import Home_main    from    './components/Home_main.vue'
-import lugares      from    './components/lugares.vue'      
+import Lugares      from    './components/lugares.vue'      
+import guias        from    './components/Guias.vue'   
+import nosotros     from   './components/Nosotros.vue'      
 
 const routes = [{
     path: '/',
@@ -47,8 +49,18 @@ const routes = [{
 {
     path: '/home/lugares',
     name: "lugares",
-    component: lugares
-    }
+    component: Lugares
+},
+{
+    path: '/home/guias',
+    name: "guias",
+    component: guias
+},
+{
+    path: '/nosotros',
+    name: "nosotros",
+    component: nosotros
+}
 ];
 
 const router = createRouter({

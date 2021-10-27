@@ -66,7 +66,7 @@
     <header class="header-main">
     <a href="#">Viaja por Colombia.com</a>
     <div class="links-header-main">
-        <a href="#">Acerca de Nosotros</a>
+        <a href="#" v-on:click="loadNosotros">Acerca de Nosotros</a>
         <a href="#">Más Información</a>
         <a href="#" class="btn-login" v-on:click="LoadProfile"><i class="fas fa-user" id="user-icon"></i></a>
     </div>
@@ -220,6 +220,15 @@ export default {
         loadLogIn: function(){
             this.$router.push({name: "logIn"})
         },
+
+        loadNosotros: function(){
+            this.$router.push({name: "nosotros"})
+        },
+        
+        LoadProfile: function(){
+            this.$router.push({name: "plan"});
+        },
+
         calculateValue: function(){
             let cant_personas = this.reserva.plan_data.cant_personas;
             if(cant_personas == 1){
@@ -240,10 +249,6 @@ export default {
             else if(cant_personas == 6){
                 this.reserva.plan_data.valor = 1250000;
             }
-        },
-
-        LoadProfile: function(){
-            this.$router.push({name: "plan"});
         },
 
         processReserve: async function(){

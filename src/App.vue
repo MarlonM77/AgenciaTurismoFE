@@ -53,6 +53,7 @@ export default {
     loadPlan: function () {
       this.$router.push({name: "plan"});
     },
+    
 
     completedLogIn: function(data) {
       localStorage.setItem("isAuth", true);

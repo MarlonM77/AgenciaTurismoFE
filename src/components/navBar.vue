@@ -6,8 +6,8 @@
                 <p>Lugares</p>
             </div>
         </div>
-        <div class="contenedor-hm">
-            <a href="#" class="circulo" v-on:click="marker2"><i class="fab fa-slideshare"></i></a>
+        <div class="contenedor-hm"  id="backgroundG">
+            <a href="#" class="circulo" v-on:click="loadGuias" id="guia"><i class="fab fa-slideshare"></i></a>
             <div class="texto-hm">
                 <p>Guías</p>
             </div>
@@ -32,6 +32,9 @@ export default {
         },
         loadLugares: function(){
             this.$router.push({name: "lugares"})
+        },
+        loadGuias: function(){
+            this.$router.push({name: "guias"})
         }
     }
 }

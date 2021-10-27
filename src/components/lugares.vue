@@ -5,7 +5,7 @@
         <header class="header-main">
             <a href="#">Viaja por Colombia.com</a>
             <div class="links-header-main">
-                <a href="#">Acerca de Nosotros</a>
+                <a href="#" v-on:click="LoadNosotros">Acerca de Nosotros</a>
                 <a href="#">Más Información</a>
                 <a href="#" class="btn-login" v-on:click="LoadProfile"><i class="fas fa-user" id="user-icon"></i></a>
             </div>
@@ -14,13 +14,12 @@
     <div class="contenidofade">
         <navBar class="nav3"> </navBar>
         <div class="title">
-            <h1>algunos de los hermosos lugares <br>
+            <h1>Algunos de los hermosos lugares <br>
             que nuestros planes ofrecen para ti</h1>
         </div>
     
         <div class="contenedor-bg">
             <div class="lugar1"><a href=""></a>
-
                 <div class="map-popup">
                     <button class="map" @click="ShowModalL = true"><i class="fas fa-map-marker-alt"></i></button>
                         <transition name="fade">
@@ -121,7 +120,13 @@ export default {
         }
     },
 
-    methods: {
+    methods: {        
+        LoadProfile: function(){
+            this.$router.push({name: "plan"});
+        },
+        loadNosotros: function(){
+            this.$router.push({name: "nosotros"})
+        },
     }
 }
 </script>
