@@ -58,7 +58,7 @@ export default {
     width: 100%;
     height: 200px;
     justify-content: space-around;
-    background-color: rgba(5, 5, 5, 0.466);
+    background-color: rgba(5, 5, 5, 0.596);
     animation: fadeIn 4s;
 }
 
