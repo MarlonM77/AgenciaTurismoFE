@@ -8,8 +8,11 @@
                 <a href="#" class="btn-login" v-on:click="LoadProfile"><i class="fas fa-user" id="user-icon"></i></a>
             </div>
         </header>
+        <h1 class="tittleN">Desarrolladores de este proyecto:</h1>
         <div class="integrante">
-
+            <p>Este proyecto fue desarrollado por estudiantes de Tercer ciclo de MisionTic2022 - Universidad Nacional
+                de Colombia.
+            </p>
         </div>
     </div>
 </template>
@@ -56,7 +59,9 @@ export default {
     height: 200px;
     justify-content: space-around;
     background-color: rgba(5, 5, 5, 0.466);
+    animation: fadeIn 4s;
 }
+
 
 .header-main-ms a{
     display: flex;
@@ -85,7 +90,24 @@ export default {
     background-position: center;
 }
 
-.integrante{
-    background-image: url("");
+.tittleN{
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;  
+    margin-top: 6em;
 }
+
+.integrante{
+    width: 100%;
+    height: 450px;
+    background-color: rgba(175, 175, 175, 0.007);
+    margin-top: 0;
+    position: absolute;
+}
+
+.integrante p{
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
 </style>

@@ -232,27 +232,26 @@ export default {
         calculateValue: function(){
             let cant_personas = this.reserva.plan_data.cant_personas;
             if(cant_personas == 1){
-                this.reserva.plan_data.valor = 100000;
+                this.reserva.plan_data.valor = 350000;
             }
             else if(cant_personas == 2){
-                this.reserva.plan_data.valor = 250000;
-            }
-            else if(cant_personas == 3){
-                this.reserva.plan_data.valor = 500000;
-            }
-            else if(cant_personas == 4){
                 this.reserva.plan_data.valor = 750000;
             }
+            else if(cant_personas == 3){
+                this.reserva.plan_data.valor = 1500000;
+            }
+            else if(cant_personas == 4){
+                this.reserva.plan_data.valor = 1950000;
+            }
             else if(cant_personas == 5){
-                this.reserva.plan_data.valor = 1000000;
+                this.reserva.plan_data.valor = 220000;
             }
             else if(cant_personas == 6){
-                this.reserva.plan_data.valor = 1250000;
+                this.reserva.plan_data.valor = 3250000;
             }
         },
 
         processReserve: async function(){
-
             if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null) {
                 this.$emit('logOut');
                 return;
@@ -260,18 +259,22 @@ export default {
 
             await this.verifyToken();
 
-            let token       = localStorage.getItem("token_access");
-            let userId      = jwt_decode(token).user_id.toString();  
+            let token                      = localStorage.getItem("token_access");
+            let userId                     = jwt_decode(token).user_id.toString();  
 
-            this.reserva.user_id           = userId;
-            this.reserva.plan_data.user    = userId;
+            this.reserva.user_id           = parseInt(userId);
+            this.reserva.plan_data.user    = this.reserva.user_id
 
+            console.log(token);
+            console.log(this.reserva.user_id);
             console.log(this.reserva);
 
             axios.post(
-                "https://agencia-logiclayer.herokuapp.com/plan/",
-                this.reserva, {headers: {'Authorization':`Bearer ${token}`}})
-                .then(() => {
+                    "https://agencia-logiclayer.herokuapp.com/plan/",
+                    this.reserva, 
+                    {headers: {'Authorization':`Bearer ${token}`}}
+                )
+                .then((result) => {
                     this.$emit('completedReserve')  
                 })
                 .catch((error) => {
@@ -285,23 +288,26 @@ export default {
                 })
         },
 
-        verifyToken: async function () {
-            return axios.post("https://agencia-logiclayer.herokuapp.com/refresh/", {refresh: localStorage.getItem("token_refresh")}, 
-            {headers: {}})
+        verifyToken: async function() {
+                return axios.post("https://agencia-logiclayer.herokuapp.com/refresh/", 
+                {refresh: localStorage.getItem("token_refresh")}, 
+                {headers: {}}
+            )
             .then((result) => {
+                console.log("New access token");
                 localStorage.setItem("token_access", result.data.access);
+                console.log(result.data.access)
             })
-            .catch(() => {
+            .catch((error) => {
                 this.$emit('logOut');
                 });
-            },
+            }
     }
 }
-
 </script>
 
-<style>
 
+<style>
 
 .main a{
     text-decoration: none;

@@ -11,13 +11,18 @@
             <h2>Correo electrónico: <span>{{email}}</span></h2>
         </div>
         <div class="reserva" v-if="sinReservas">
-            <h2>Mis Reservas:</h2>
+            <h2>Mis Reservas:
+<!--                <a href="" title="Elimina Reserva" class="delete"
+                v-on:click="processDelete"><i class="fas fa-trash-alt"></i></a> -->
+            </h2>   
             <h2><span>{{nombre_plan}}</span></h2>
-            <h2>descripcion: <span>{{descripcion}}</span></h2>
+            <h2>descripcion: <br><span>{{descripcion}}</span></h2>
             <h2>cantidad de personas: <span>{{cant_personas}}</span></h2>
             <h2>valor: <span>{{valor}}COP</span></h2>
             <h2>fecha_inicio: <span>{{fecha_inicio}}</span></h2>
             <h2>fecha_fin: <span>{{fecha_fin}}</span></h2>
+            <div class="delete">
+            </div>
         </div>
 </div>
 </template>
@@ -225,6 +230,20 @@
     color: crimson;
     font-weight: bold;
 }
+
+.reserva .delete{
+    position: absolute;
+    font-size: 35px;
+    margin-left: 6.5em;
+    color: rgb(0, 0, 0);
+    transition: 0.5s;
+}
+
+.reserva .delete:hover{
+    transform: scale(1.2);
+    color: rgb(255, 255, 255);
+}
+
 .information h2{
     font-size: 25px;
     color: #2a2a2a;
@@ -234,4 +253,5 @@
     color: crimson;
     font-weight: bold;
 }
+
 </style>

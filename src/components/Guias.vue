@@ -47,7 +47,7 @@
         <header class="header-main">
             <a href="#">Viaja por Colombia.com</a>
             <div class="links-header-main">
-                <a href="#" v-on:click="LoadNosotros">Acerca de Nosotros</a>
+                <a href="#" v-on:click="loadNosotros" >Acerca de Nosotros</a>
                 <a href="#">Más Información</a>
                 <a href="#" class="btn-login" v-on:click="LoadProfile"><i class="fas fa-user" id="user-icon"></i></a>
             </div>
@@ -296,13 +296,13 @@ export default {
     font-size: 18px;
     text-align: center;
     border-radius: 8px;
-    background-color: rgb(131, 198, 207);
-    border: solid 1px rgb(0, 48, 54);
+    background-color: rgb(146, 226, 255);
+    border: solid 1px rgb(1, 104, 117);
     transition: 0.5s;
 }
 
 .modal-formG .btn-Contactar:hover{
-    background-color: rgba(35, 154, 170, 0.87);
+    background-color: rgba(52, 201, 221, 0.87);
     border: solid 1px rgb(7, 52, 58);
 }
 

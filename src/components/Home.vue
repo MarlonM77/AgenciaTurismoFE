@@ -79,6 +79,7 @@ export default {
 
 
 <style>
+
 .main {
     margin: 0;
     padding: 0;
@@ -182,6 +183,7 @@ export default {
     flex-direction: row;
     width: 170px;
 }
+
 .main .circulos-links .contenedor .circulo {
     display: flex;
     justify-content: center;
@@ -284,5 +286,9 @@ export default {
     color: #fff;
     text-decoration: none;
     font-size: 20px;
+}
+
+.contenedor-footer-texto p{
+    font-size: 15px;
 }
 </style>

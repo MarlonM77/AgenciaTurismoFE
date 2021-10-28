@@ -31,6 +31,8 @@
 <script>
 import axios from 'axios';
 
+import Swal from 'sweetalert2'
+
 export default {
     name: "SignUp",
 
@@ -54,7 +56,8 @@ export default {
             axios.post(
                 "https://agencia-logiclayer.herokuapp.com/user/",
                 this.user,
-                {headers: {}})
+                {headers: {}}
+                )
                 .then((result) => {
                     let dataSignUp = {
                         username:       this.user.username,
@@ -66,13 +69,19 @@ export default {
 
                 .catch((error) => {
                     console.log(error)
-                    alert("ERROR: Fallo en el registro.");
+                    if(error.response.status == "400")
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Parece que ha ocurrido un error, comprueba que los campos se hayan llenado correctamente',
+                        footer: 'Viaja por colombia Error de registro'
+                        })
                 });
         },
         loadLogIn: function(){
             this.$router.push({name: "logIn"})
-        },
-    },
+        }
+    }
 }
 </script>
 
@@ -159,7 +168,7 @@ input[type="password"]{
 
 p{
     text-align: center;
-    font-size:  14px;
+    font-size:  18px;
     color: #ffffff;
 }
 

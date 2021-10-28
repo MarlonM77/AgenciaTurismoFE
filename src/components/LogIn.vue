@@ -27,7 +27,7 @@
             <a class="link-sign" href="#">Iniciar con google</a>
         </div>
         <div>
-        <p class="member">No tienes una cuenta aún? <button class="register" v-on:click="loadSignUp" > Registrarse </button></p>
+            <p class="member">No tienes una cuenta aún? <button class="register" v-on:click="loadSignUp" > Registrarse </button></p>
         </div>
     </form>
 </div>
@@ -108,7 +108,7 @@ export default {
     position: relative;
     width: 50px;
     height: 50px;
-    font-size: 30px;
+    font-size: 38px;
     top: 25px;
     left: 40px;
 }

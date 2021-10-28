@@ -5,7 +5,7 @@
         <header class="header-main">
             <a href="#">Viaja por Colombia.com</a>
             <div class="links-header-main">
-                <a href="#" v-on:click="LoadNosotros">Acerca de Nosotros</a>
+                <a href="#" v-on:click="loadNosotros">Acerca de Nosotros</a>
                 <a href="#">Más Información</a>
                 <a href="#" class="btn-login" v-on:click="LoadProfile"><i class="fas fa-user" id="user-icon"></i></a>
             </div>
@@ -155,7 +155,7 @@ export default {
 .cover2{
     position: relative;
     top: -353px;
-    height: 80vh;
+    height: 70vh;
     width: 100%;
     background: rgb(1, 8, 14);
     background-repeat: no-repeat;
