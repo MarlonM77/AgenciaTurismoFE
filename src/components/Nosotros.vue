@@ -13,6 +13,32 @@
             <p>Este proyecto fue desarrollado por estudiantes de Tercer ciclo de MisionTic2022 - Universidad Nacional
                 de Colombia.
             </p>
+            <div class="nombres">
+                <div class="nicolas">
+                    <img src="../assets/nicolas2.jpg" alt="" width="250" height="300">
+                    <h2>Nicolás<br>Camilo Nuñez Duarte</h2> 
+                </div>
+                <div class="liset">
+                    <img src="../assets/liset.jpg" alt="" width="250" height="300">
+                    <h2>Liset<br>Johana Bernal Ramirez</h2>
+                </div>
+                <div class="marlon">
+                    <img src="../assets/marlon.jpg" alt="integrante1" width="250" height="300">
+                    <h2>Marlon<br>Murcia Betancourt</h2>
+                </div>
+                <div class="liney">
+                    <img src="../assets/liney.jpg" alt="" width="250" height="300">
+                    <h2>Liney<br>Ortega Rocha</h2>
+                </div>
+                <div class="nicolas2">
+                    <img src="../assets/nicolas.jpg" alt="" width="250" height="300">
+                    <h2>Nicolás<br>Stiven Rodriguez Camargo</h2>
+                </div>
+                <div class="naylla">
+                    <img src="../assets/nayla.jpg" alt="" width="250" height="300">
+                    <h2>Naylla<br>Zullay Mojica Mariño</h2>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -100,14 +126,27 @@ export default {
 .integrante{
     width: 100%;
     height: 450px;
-    background-color: rgba(175, 175, 175, 0.007);
+    background-color: rgba(3, 3, 3, 0.253);
     margin-top: 0;
     position: absolute;
+    display: grid;
 }
 
 .integrante p{
     color: rgb(255, 255, 255);
     font-size: 25px;
+}
+
+.nombres{
+    display: flex;
+    justify-content: space-around;
+    align-items:flex-end;
+    text-align: center;
+}
+
+.nombres h2{
+    font-size: 20px;
+    color: #fff;
 }
 
 </style>

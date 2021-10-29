@@ -15,11 +15,11 @@
                     <div class="input-contenedorHm">
                         <input type="text" value="Plan Senderismo de ensueño" class="tittle" readonly>
                         <h2>Fecha Inicio:</h2>
-                        <Datepicker v-model="dataPlan.dateI" class="dateI" :minDate="new Date()" 
-                            v-on:update:modelValue="checkIn" locale="es" autoApply :closeOnAutoApply="false"></Datepicker>
+                        <input type="datetime-local" v-model="dataPlan.dateI" class="dateI" 
+                            v-on:input="checkIn"  min="2021-10-29T08:30" max="2025-06-30T16:30" required>
                         <h2>Fecha Fin:</h2>
-                        <Datepicker v-model="dataPlan.dateF" class="dateF" :minDate="new Date()"
-                            v-on:update:modelValue="checkIn2" locale="es" autoApply :closeOnAutoApply="false"></Datepicker>
+                        <input type="datetime-local" v-model="dataPlan.dateF" class="dateF" 
+                            v-on:input="checkIn"  min="2021-10-29T08:30" max="2025-06-30T16:30" required>
                         <h2>Cantidad de Personas: </h2> 
                         <input type="number" placeholder="Personas" v-model="reserva.plan_data.cant_personas" min="1" max="6" class="number" 
                             id="number" v-on:change="calculateValue">
@@ -195,8 +195,8 @@ export default {
                 plan_data:{
                     user:            0,
                     valor:           100000,
-                    fecha_inicio:    "2021-02-05 18:30:00",
-                    fecha_fin:       "2021-02-10 18:30:00",
+                    fecha_inicio:    "",
+                    fecha_fin:       "",
                     nombre_plan:     "Plan Senderismo de ensueño",
                     descripcion:     "Este Plan de senderismo en Santa Marta se caracteriza por sus impactantes vistas y recorridos",
                     cant_personas:   1
@@ -262,8 +262,11 @@ export default {
             let token                      = localStorage.getItem("token_access");
             let userId                     = jwt_decode(token).user_id.toString();  
 
-            this.reserva.user_id           = parseInt(userId);
-            this.reserva.plan_data.user    = this.reserva.user_id
+            this.reserva.user_id                = parseInt(userId);
+            this.reserva.plan_data.user         = this.reserva.user_id
+            this.reserva.plan_data.fecha_inicio = this.dataPlan.dateI
+            this.reserva.plan_data.fecha_fin    = this.dataPlan.dateF
+
 
             console.log(token);
             console.log(this.reserva.user_id);
