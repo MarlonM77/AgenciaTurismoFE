@@ -10,33 +10,13 @@
         </header>
         <h1 class="tittleN">Desarrolladores de este proyecto:</h1>
         <div class="integrante">
-            <p>Este proyecto fue desarrollado por estudiantes de Tercer ciclo de MisionTic2022 - Universidad Nacional
-                de Colombia.
+            <p>Este proyecto fue desarrollado como proyecto final de cilo 3 del diplomado en desarrollo de software del ministerio de las Tics
+                y la Universidad Nacional de Colombia.
             </p>
             <div class="nombres">
-                <div class="nicolas">
-                    <img src="../assets/nicolas2.jpg" alt="" width="250" height="300">
-                    <h2>Nicolás<br>Camilo Nuñez Duarte</h2> 
-                </div>
-                <div class="liset">
-                    <img src="../assets/liset.jpg" alt="" width="250" height="300">
-                    <h2>Liset<br>Johana Bernal Ramirez</h2>
-                </div>
                 <div class="marlon">
                     <img src="../assets/marlon.jpg" alt="integrante1" width="250" height="300">
                     <h2>Marlon<br>Murcia Betancourt</h2>
-                </div>
-                <div class="liney">
-                    <img src="../assets/liney.jpg" alt="" width="250" height="300">
-                    <h2>Liney<br>Ortega Rocha</h2>
-                </div>
-                <div class="nicolas2">
-                    <img src="../assets/nicolas.jpg" alt="" width="250" height="300">
-                    <h2>Nicolás<br>Stiven Rodriguez Camargo</h2>
-                </div>
-                <div class="naylla">
-                    <img src="../assets/nayla.jpg" alt="" width="250" height="300">
-                    <h2>Naylla<br>Zullay Mojica Mariño</h2>
                 </div>
             </div>
         </div>
